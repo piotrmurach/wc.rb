@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/wc"
+
+begin
+  WC::CLI.new(ARGV).run
+rescue WC::CLI::FileNotFoundError => err
+  abort "#{$PROGRAM_NAME}: #{err.filename}: open: No such file or directory"
+rescue WC::CLI::UsageError => err
+  abort "#{$PROGRAM_NAME}: #{err.message}\nusage: #{$PROGRAM_NAME} [-clmw] [file ...]\n"
+end
